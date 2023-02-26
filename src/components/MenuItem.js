@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ItemBadges } from "./ItemBadges"
+import { ItemBadges } from "./ItemBadges";
 
 export function MenuItem({ item }) {
   const [dropdown, setDropdown] = useState(false);
@@ -8,7 +8,7 @@ export function MenuItem({ item }) {
     <div>
       <h1>{item.name}</h1>
       <h2>{item.nutrients[0].value} Calories</h2>
-      <ItemBadges filters={item.filters}/>
+      <ItemBadges filters={item.filters} />
       <button onClick={() => setDropdown(!dropdown)}>▼</button>
       {dropdown ? (
         <div>
