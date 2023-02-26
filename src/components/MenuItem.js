@@ -16,7 +16,7 @@ export function MenuItem({ item }) {
           <p>{item.nutrients[2].value} Total Carbohydrates</p>
           <p>{item.nutrients[3].value}g Sugar</p>
           <p>{item.nutrients[4].value}g Total Fat</p>
-          <p>Ingedients: {item.ingredients}</p>
+          <p>Ingredients: {item.ingredients}</p>
         </div>
       ) : (
         <p>Not Dropped Down</p>
