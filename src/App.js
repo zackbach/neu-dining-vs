@@ -5,16 +5,26 @@ import { MenuItem } from "./components/MenuItem";
 
 function App() {
   // TODO: default state should be based on time of day
-  const [curPeriod, setPeriod] = useState(0);
-  const [periodsSteast, setPeriodsSteast] = useState([{id: ""}, {id: ""}, {id: ""}]);
+  // const [curPeriod, setPeriod] = useState(0);
+  const [periodsSteast, setPeriodsSteast] = useState([
+    { id: "" },
+    { id: "" },
+    { id: "" },
+  ]);
+  const [periodsIV, setPeriodsIV] = useState([
+    { id: "" },
+    { id: "" },
+    { id: "" },
+  ]);
   const [menuSteast, setMenuSteast] = useState();
   const [menuIV, setMenuIV] = useState();
 
-  async function getMenuSteast() {
+  async function getMenuSteast(index) {
     await axios
       .get(
-        "https://api.dineoncampus.com/v1/location/586d05e4ee596f6e6c04b527/periods/" 
-        + periodsSteast[curPeriod].id + "?platform=0&date=2023-2-26"
+        "https://api.dineoncampus.com/v1/location/586d05e4ee596f6e6c04b527/periods/" +
+          periodsSteast[index].id +
+          "?platform=0&date=2023-2-26"
       )
       .then(({ data }) => {
         if (data.error) {
@@ -31,17 +41,20 @@ function App() {
       });
   }
 
-  async function getMenuIV() {
+  async function getMenuIV(index) {
     await axios
       .get(
-        "https://api.dineoncampus.com/v1/location/5f4f8a425e42ad17329be131/periods?platform=0&date=2023-2-26"
+        "https://api.dineoncampus.com/v1/location/5f4f8a425e42ad17329be131/periods/" +
+          periodsIV[index].id +
+          "?platform=0&date=2023-2-26"
       )
       .then(({ data }) => {
         if (data.error) {
           console.error(data.error);
           alert("An error occurred.");
         } else {
-          setmenuIV(data);
+          setMenuIV(data.menu.periods.categories);
+          setPeriodsIV(data.periods);
         }
       })
       .catch((err) => {
@@ -51,11 +64,9 @@ function App() {
   }
 
   useEffect(() => {
-    getMenuSteast();
-  }, []);
-
-  useEffect(() => {
-    getMenuIV();
+    // this might be where we could do current time of day logic
+    getMenuSteast(0);
+    getMenuIV(0);
   }, []);
 
   // Steast:
@@ -67,9 +78,35 @@ function App() {
   // return <MenuItem item={testItem} />;
   return (
     <div>
+      <button
+        onClick={() => {
+          // setPeriod(0);
+          getMenuSteast(0);
+          getMenuIV(0);
+        }}
+      >
+        Breakfast
+      </button>
+      <button
+        onClick={() => {
+          // setPeriod(1);
+          getMenuSteast(1);
+          getMenuIV(1);
+        }}
+      >
+        Lunch
+      </button><button
+        onClick={() => {
+          // setPeriod(2);
+          getMenuSteast(2);
+          getMenuIV(2);
+        }}
+      >
+        Dinner
+      </button>
       <div>
         {menuSteast ? (
-          menuSteast.menu.periods.categories.map((station) =>
+          menuSteast.map((station) =>
             station.items.map((item) => <MenuItem item={item} />)
           )
         ) : (
@@ -78,7 +115,7 @@ function App() {
       </div>
       <div>
         {menuIV ? (
-          menuIV.menu.periods.categories.map((station) =>
+          menuIV.map((station) =>
             station.items.map((item) => <MenuItem item={item} />)
           )
         ) : (
