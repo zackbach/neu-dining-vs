@@ -1,5 +1,6 @@
 import axios from "axios";
 import "../App.css";
+import "./Home.css";
 import { useEffect, useState } from "react";
 import { MenuItem } from "../components/MenuItem";
 
@@ -24,7 +25,7 @@ function Home() {
       .get(
         "https://api.dineoncampus.com/v1/location/586d05e4ee596f6e6c04b527/periods/" +
           periodsSteast[index].id +
-          "?platform=0&date=2023-2-26"
+          "?platform=0&date=2023-3-12"
       )
       .then(({ data }) => {
         if (data.error) {
@@ -46,7 +47,7 @@ function Home() {
       .get(
         "https://api.dineoncampus.com/v1/location/5f4f8a425e42ad17329be131/periods/" +
           periodsIV[index].id +
-          "?platform=0&date=2023-2-26"
+          "?platform=0&date=2023-3-12"
       )
       .then(({ data }) => {
         if (data.error) {
@@ -95,7 +96,8 @@ function Home() {
         }}
       >
         Lunch
-      </button><button
+      </button>
+      <button
         onClick={() => {
           // setPeriod(2);
           getMenuSteast(2);
@@ -104,23 +106,29 @@ function Home() {
       >
         Dinner
       </button>
-      <div>
-        {menuSteast ? (
-          menuSteast.map((station) =>
-            station.items.map((item) => <MenuItem item={item} />)
-          )
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
-      <div>
-        {menuIV ? (
-          menuIV.map((station) =>
-            station.items.map((item) => <MenuItem item={item} />)
-          )
-        ) : (
-          <p>Loading...</p>
-        )}
+      <div className="container">
+        <div>
+          {menuSteast ? (
+            menuSteast.map((station) =>
+              station.items.map((item) => (
+                <MenuItem key={item.id} item={item} />
+              ))
+            )
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
+        <div>
+          {menuIV ? (
+            menuIV.map((station) =>
+              station.items.map((item) => (
+                <MenuItem key={item.id} item={item} />
+              ))
+            )
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
       </div>
     </div>
   );
