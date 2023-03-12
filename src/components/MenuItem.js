@@ -10,7 +10,7 @@ export function MenuItem({ item }) {
       <h2>{item.nutrients[0].value} Calories</h2>
       <ItemBadges filters={item.filters} />
       <button onClick={() => setDropdown(!dropdown)}>▼</button>
-      {dropdown ? (
+      {dropdown && (
         <div>
           <p>{item.nutrients[1].value}g Protein</p>
           <p>{item.nutrients[2].value} Total Carbohydrates</p>
@@ -18,8 +18,6 @@ export function MenuItem({ item }) {
           <p>{item.nutrients[4].value}g Total Fat</p>
           <p>Ingredients: {item.ingredients}</p>
         </div>
-      ) : (
-        <p>Not Dropped Down</p>
       )}
     </div>
   );

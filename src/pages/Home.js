@@ -68,6 +68,7 @@ function Home() {
     // this might be where we could do current time of day logic
     getMenuSteast(0);
     getMenuIV(0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Steast:
@@ -106,7 +107,7 @@ function Home() {
       >
         Dinner
       </button>
-      <div className="container">
+      <div className="dining-halls-container">
         <div className="dining-hall">
           {menuSteast ? (
             menuSteast.map((station) =>
