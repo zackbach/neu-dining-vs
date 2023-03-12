@@ -107,7 +107,7 @@ function Home() {
         Dinner
       </button>
       <div className="container">
-        <div>
+        <div className="dining-hall">
           {menuSteast ? (
             menuSteast.map((station) =>
               station.items.map((item) => (
@@ -118,7 +118,7 @@ function Home() {
             <p>Loading...</p>
           )}
         </div>
-        <div>
+        <div className="dining-hall">
           {menuIV ? (
             menuIV.map((station) =>
               station.items.map((item) => (
