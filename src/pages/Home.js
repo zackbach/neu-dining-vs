@@ -3,8 +3,7 @@ import "../App.css";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import { MenuItem } from "../components/MenuItem";
-import moment from 'moment';
-
+import moment from "moment";
 
 function Home() {
   // TODO: default state should be based on time of day
@@ -22,13 +21,13 @@ function Home() {
   const [menuSteast, setMenuSteast] = useState();
   const [menuIV, setMenuIV] = useState();
 
-
   async function getMenuSteast(index) {
     await axios
       .get(
         "https://api.dineoncampus.com/v1/location/586d05e4ee596f6e6c04b527/periods/" +
           periodsSteast[index].id +
-          "?platform=0&date=" + moment().format("YYYY-M-D")
+          "?platform=0&date=" +
+          moment().format("YYYY-M-D")
       )
       .then(({ data }) => {
         if (data.error) {
@@ -50,7 +49,8 @@ function Home() {
       .get(
         "https://api.dineoncampus.com/v1/location/5f4f8a425e42ad17329be131/periods/" +
           periodsIV[index].id +
-          "?platform=0&date=" + moment().format("YYYY-M-D")
+          "?platform=0&date=" +
+          moment().format("YYYY-M-D")
       )
       .then(({ data }) => {
         if (data.error) {
@@ -71,7 +71,7 @@ function Home() {
     // this might be where we could do current time of day logic
     getMenuSteast(0);
     getMenuIV(0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Steast:
@@ -83,33 +83,38 @@ function Home() {
   // return <MenuItem item={testItem} />;
   return (
     <div>
-      <button
-        onClick={() => {
-          // setPeriod(0);
-          getMenuSteast(0);
-          getMenuIV(0);
-        }}
-      >
-        Breakfast
-      </button>
-      <button
-        onClick={() => {
-          // setPeriod(1);
-          getMenuSteast(1);
-          getMenuIV(1);
-        }}
-      >
-        Lunch
-      </button>
-      <button
-        onClick={() => {
-          // setPeriod(2);
-          getMenuSteast(2);
-          getMenuIV(2);
-        }}
-      >
-        Dinner
-      </button>
+      <div>
+        <button
+          className="time-button"
+          onClick={() => {
+            // setPeriod(0);
+            getMenuSteast(0);
+            getMenuIV(0);
+          }}
+        >
+          Breakfast
+        </button>
+        <button
+          className="time-button"
+          onClick={() => {
+            // setPeriod(1);
+            getMenuSteast(1);
+            getMenuIV(1);
+          }}
+        >
+          Lunch
+        </button>
+        <button
+          className="time-button"
+          onClick={() => {
+            // setPeriod(2);
+            getMenuSteast(2);
+            getMenuIV(2);
+          }}
+        >
+          Dinner
+        </button>
+      </div>
       <div className="dining-halls-container">
         <div className="dining-hall">
           {menuSteast ? (
