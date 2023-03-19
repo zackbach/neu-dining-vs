@@ -83,9 +83,9 @@ function Home() {
   // return <MenuItem item={testItem} />;
   return (
     <div>
-      <div>
-        {/* TODO: make sure that steast and IV menus are updated at the same time
-                  and also include some loading icon or something */}
+      {/* TODO: make sure that steast and IV menus are updated at the same time
+                and also include some loading icon or something */}
+      <div className="flex justify-center my-3">
         <button
           className="time-button"
           onClick={() => {
@@ -119,6 +119,7 @@ function Home() {
       </div>
       <div className="dining-halls-container">
         <div className="dining-hall px-2">
+          <div className="text-center text-3xl my-1">Stetson East</div>
           {menuSteast ? (
             menuSteast.map((station) =>
               station.items.map((item) => (
@@ -130,6 +131,7 @@ function Home() {
           )}
         </div>
         <div className="dining-hall px-2">
+        <div className="text-center text-3xl my-1">International Village</div>
           {menuIV ? (
             menuIV.map((station) =>
               station.items.map((item) => (
