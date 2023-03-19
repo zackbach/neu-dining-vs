@@ -84,6 +84,8 @@ function Home() {
   return (
     <div>
       <div>
+        {/* TODO: make sure that steast and IV menus are updated at the same time
+                  and also include some loading icon or something */}
         <button
           className="time-button"
           onClick={() => {
@@ -116,7 +118,7 @@ function Home() {
         </button>
       </div>
       <div className="dining-halls-container">
-        <div className="dining-hall">
+        <div className="dining-hall px-2">
           {menuSteast ? (
             menuSteast.map((station) =>
               station.items.map((item) => (
@@ -127,7 +129,7 @@ function Home() {
             <p>Loading...</p>
           )}
         </div>
-        <div className="dining-hall">
+        <div className="dining-hall px-2">
           {menuIV ? (
             menuIV.map((station) =>
               station.items.map((item) => (
