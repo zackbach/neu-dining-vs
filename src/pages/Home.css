@@ -10,6 +10,7 @@
 
 .dining-hall {
     width: 50%;
+    px : 2
 }
 
 @layer components {

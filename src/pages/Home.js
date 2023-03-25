@@ -82,7 +82,7 @@ function Home() {
 
   // return <MenuItem item={testItem} />;
   return (
-    <div>
+    <div className="bg-gray-100">
       {/* TODO: make sure that steast and IV menus are updated at the same time
                 and also include some loading icon or something */}
       <div className="flex justify-center my-3">
@@ -118,7 +118,7 @@ function Home() {
         </button>
       </div>
       <div className="dining-halls-container">
-        <div className="dining-hall px-2">
+        <div className="dining-hall">
           <div className="text-center text-3xl my-1">Stetson East</div>
           {menuSteast ? (
             menuSteast.map((station) =>
@@ -130,8 +130,8 @@ function Home() {
             <p>Loading...</p>
           )}
         </div>
-        <div className="dining-hall px-2">
-        <div className="text-center text-3xl my-1">International Village</div>
+        <div className="dining-hall">
+          <div className="text-center text-3xl my-1">International Village</div>
           {menuIV ? (
             menuIV.map((station) =>
               station.items.map((item) => (
