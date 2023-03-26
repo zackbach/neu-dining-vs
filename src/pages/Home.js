@@ -20,6 +20,9 @@ function Home() {
   ]);
   const [menuSteast, setMenuSteast] = useState();
   const [menuIV, setMenuIV] = useState();
+  const [filterVegetarian, setFilterVegetarian] = useState(false);
+  const [filterVegan, setFilterVegean] = useState(false);
+  const [filterCalories, setFilterCalories] = useState(false);
 
   async function getMenuSteast(index) {
     await axios
@@ -74,6 +77,34 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function filterItems(menuItems) {
+    if (filterVegetarian == true) {
+      return menuItems.filter(
+        (item) =>
+          item.filters.filter((filter) => filter.name === "Vegetarian").length >
+          0
+      );
+    }
+    if (filterVegan == true) {
+      return menuItems.filter(
+        (item) =>
+          item.filters.filter((filter) => filter.name === "Vegan").length > 0
+      );
+    }
+    if (filterCalories == true) {
+      console.log(menuItems);
+      // theres two ways we can do this, either combine all the stations into one and sort everything at once, or sort each station individually and include a header for each station
+      return menuItems.sort((item, nextItem) =>
+        item.calories < nextItem.calories
+          ? 1
+          : item.calories > nextItem.calories
+          ? -1
+          : 0
+      );
+    }
+    return menuItems;
+  }
+
   // Steast:
   // https://api.dineoncampus.com/v1/location/586d05e4ee596f6e6c04b527/periods?platform=0&date=YYYY-MM-DD
 
@@ -117,12 +148,38 @@ function Home() {
           Dinner
         </button>
       </div>
+      <div>
+        <button
+          className="filter-button"
+          onClick={() => {
+            setFilterVegetarian(!filterVegetarian);
+          }}
+        >
+          Vegetarian
+        </button>
+        <button
+          className="filter-button"
+          onClick={() => {
+            setFilterVegean(!filterVegan);
+          }}
+        >
+          Vegan
+        </button>
+        <button
+          className="filter-button"
+          onClick={() => {
+            setFilterCalories(!filterCalories);
+          }}
+        >
+          Calories
+        </button>
+      </div>
       <div className="dining-halls-container">
         <div className="dining-hall">
-          <div className="text-center text-3xl my-1">Stetson East</div>
+          <div className="text-center text-xl my-1">Stetson East</div>
           {menuSteast ? (
             menuSteast.map((station) =>
-              station.items.map((item) => (
+              filterItems(station.items).map((item) => (
                 <MenuItem key={item.id} item={item} />
               ))
             )
@@ -131,10 +188,10 @@ function Home() {
           )}
         </div>
         <div className="dining-hall">
-          <div className="text-center text-3xl my-1">International Village</div>
+          <div className="text-center text-xl my-1">International Village</div>
           {menuIV ? (
             menuIV.map((station) =>
-              station.items.map((item) => (
+              filterItems(station.items).map((item) => (
                 <MenuItem key={item.id} item={item} />
               ))
             )

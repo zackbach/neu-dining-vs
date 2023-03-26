@@ -13,16 +13,40 @@
     px : 2
 }
 
+.time-button { width: 30%;}
+
 @layer components {
     .time-button {
         @apply 
         inline-block 
         rounded border 
         border-indigo-600 
-        bg-indigo-600 
-        px-12 
+        bg-indigo-600  
         py-3
         mx-2
+        text-sm 
+        font-medium 
+        text-white 
+        hover:bg-transparent 
+        hover:text-indigo-600 
+        focus:outline-none 
+        focus:ring 
+        active:text-indigo-500;
+    }
+}
+
+
+.filter-button { width : 20%;}
+
+@layer components {
+    .filter-button {
+        @apply 
+        inline-block 
+        rounded border 
+        border-indigo-600 
+        bg-indigo-600 
+        py-1
+        mx-1
         text-sm 
         font-medium 
         text-white 
