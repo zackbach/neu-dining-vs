@@ -5,7 +5,7 @@ export function MenuItem({ item }) {
   const [dropdown, setDropdown] = useState(false);
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 mx-2">
       <div className="bg-gray-300 relative h-20">
         <h1 className="absolute left-0 top-0">{item.name}</h1>
         <h2 className="absolute right-0 top-0">
