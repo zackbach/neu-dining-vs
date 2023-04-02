@@ -21,7 +21,7 @@ function Home() {
   const [menuSteast, setMenuSteast] = useState();
   const [menuIV, setMenuIV] = useState();
   const [filterVegetarian, setFilterVegetarian] = useState(false);
-  const [filterVegan, setFilterVegean] = useState(false);
+  const [filterVegan, setFilterVegan] = useState(false);
   const [filterCalories, setFilterCalories] = useState(false);
 
   async function getMenuSteast(index) {
@@ -78,20 +78,20 @@ function Home() {
   }, []);
 
   function filterItems(menuItems) {
-    if (filterVegetarian == true) {
+    if (filterVegetarian === true) {
       return menuItems.filter(
         (item) =>
           item.filters.filter((filter) => filter.name === "Vegetarian").length >
           0
       );
     }
-    if (filterVegan == true) {
+    if (filterVegan === true) {
       return menuItems.filter(
         (item) =>
           item.filters.filter((filter) => filter.name === "Vegan").length > 0
       );
     }
-    if (filterCalories == true) {
+    if (filterCalories === true) {
       console.log(menuItems);
       // theres two ways we can do this, either combine all the stations into one and sort everything at once, or sort each station individually and include a header for each station
       return menuItems.sort((item, nextItem) =>
@@ -150,7 +150,7 @@ function Home() {
       </div>
       <div>
         <button
-          className="filter-button"
+          className={filterVegetarian ? "filter-button-active" : "filter-button"}
           onClick={() => {
             setFilterVegetarian(!filterVegetarian);
           }}
@@ -158,15 +158,15 @@ function Home() {
           Vegetarian
         </button>
         <button
-          className="filter-button"
+          className={filterVegan ? "filter-button-active" : "filter-button"}
           onClick={() => {
-            setFilterVegean(!filterVegan);
+            setFilterVegan(!filterVegan);
           }}
         >
           Vegan
         </button>
         <button
-          className="filter-button"
+          className={filterCalories ? "filter-button-active" : "filter-button"}
           onClick={() => {
             setFilterCalories(!filterCalories);
           }}

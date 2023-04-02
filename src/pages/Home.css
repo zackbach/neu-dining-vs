@@ -36,11 +36,10 @@
 }
 
 
-.filter-button { width : 20%;}
-
 @layer components {
     .filter-button {
         @apply 
+        w-1/5
         inline-block 
         rounded border 
         border-indigo-600 
@@ -52,6 +51,23 @@
         text-white 
         hover:bg-transparent 
         hover:text-indigo-600 
+        focus:outline-none 
+        focus:ring 
+        active:text-indigo-500;
+    }
+
+    .filter-button-active {
+        @apply 
+        w-1/5
+        inline-block 
+        rounded border 
+        border-indigo-600 
+        bg-transparent
+        py-1
+        mx-1
+        text-sm 
+        font-medium 
+        text-indigo-600 
         focus:outline-none 
         focus:ring 
         active:text-indigo-500;
