@@ -29,6 +29,7 @@ export function MenuItem({ item }) {
             <p>{item.nutrients[3].value_numeric}g Sugar</p>
             <p>{item.nutrients[4].value_numeric}g Total Fat</p>
             <p>Ingredients: {item.ingredients}</p>
+            <p>Station: {item.station}</p>
           </div>
         )}
     </div>
