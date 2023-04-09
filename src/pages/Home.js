@@ -125,9 +125,9 @@ function Home() {
     }
     if (filterProtein === true) {
       return menuItems.sort((item, nextItem) =>
-        item.nutrients[1].value < nextItem.nutrients[1].value
+        item.nutrients[1].value_numeric < nextItem.nutrients[1].value_numeric
           ? 1
-          : item.nutrients[1].value > nextItem.nutrients[1].value
+          : item.nutrients[1].value_numeric > nextItem.nutrients[1].value_numeric
           ? -1
           : 0
       );
