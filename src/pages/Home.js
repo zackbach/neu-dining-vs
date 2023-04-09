@@ -23,6 +23,7 @@ function Home() {
   const [filterVegetarian, setFilterVegetarian] = useState(false);
   const [filterVegan, setFilterVegan] = useState(false);
   const [filterCalories, setFilterCalories] = useState(false);
+  const [filterProtein, setFilterProtein] = useState(false);
 
   async function getMenuSteast(index) {
     await axios
@@ -92,12 +93,20 @@ function Home() {
       );
     }
     if (filterCalories === true) {
-      console.log(menuItems);
       // theres two ways we can do this, either combine all the stations into one and sort everything at once, or sort each station individually and include a header for each station
       return menuItems.sort((item, nextItem) =>
         item.calories < nextItem.calories
           ? 1
           : item.calories > nextItem.calories
+          ? -1
+          : 0
+      );
+    }
+    if (filterProtein === true) {
+      return menuItems.sort((item, nextItem) =>
+        item.nutrients[1].value < nextItem.nutrients[1].value
+          ? 1
+          : item.nutrients[1].value > nextItem.nutrients[1].value
           ? -1
           : 0
       );
@@ -148,9 +157,11 @@ function Home() {
           Dinner
         </button>
       </div>
-      <div>
+      <div className="flex pt-3 justify-center">
         <button
-          className={filterVegetarian ? "filter-button-active" : "filter-button"}
+          className={
+            filterVegetarian ? "filter-button-active" : "filter-button"
+          }
           onClick={() => {
             setFilterVegetarian(!filterVegetarian);
           }}
@@ -173,10 +184,18 @@ function Home() {
         >
           Calories
         </button>
+        <button
+          className={filterProtein ? "filter-button-active" : "filter-button"}
+          onClick={() => {
+            setFilterProtein(!filterProtein);
+          }}
+        >
+          Protein
+        </button>
       </div>
       <div className="dining-halls-container">
         <div className="dining-hall">
-          <div className="text-center text-xl my-1">Stetson East</div>
+          <div className="text-center text-3xl my-5">Stetson East</div>
           {menuSteast ? (
             menuSteast.map((station) =>
               filterItems(station.items).map((item) => (
@@ -188,7 +207,7 @@ function Home() {
           )}
         </div>
         <div className="dining-hall">
-          <div className="text-center text-xl my-1">International Village</div>
+          <div className="text-center text-3xl my-5">International Village</div>
           {menuIV ? (
             menuIV.map((station) =>
               filterItems(station.items).map((item) => (

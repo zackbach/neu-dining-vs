@@ -21,6 +21,7 @@ export function ItemBadges({ className, filters }) {
                 src={vegetarian}
                 alt="Vegetarian"
                 className="h-6 aspect-square"
+                draggable="false"
               />
             );
           case "Vegan":
@@ -30,6 +31,7 @@ export function ItemBadges({ className, filters }) {
                 src={vegan}
                 alt="Vegan"
                 className="h-6 aspect-square"
+                draggable="false"
               />
             );
           case "Balanced U":
@@ -39,6 +41,7 @@ export function ItemBadges({ className, filters }) {
                 src={balanced}
                 alt="Balanced"
                 className="h-6 aspect-square"
+                draggable="false"
               />
             );
           case "How Good Friendly":
@@ -48,6 +51,7 @@ export function ItemBadges({ className, filters }) {
                 src={friendly}
                 alt="Climate Friendly"
                 className="h-6 aspect-square"
+                draggable="false"
               />
             );
           case "How Good Good":
@@ -57,6 +61,7 @@ export function ItemBadges({ className, filters }) {
                 src={good}
                 alt="Good Impact"
                 className="h-6 aspect-square"
+                draggable="false"
               />
             );
           case "How Good Great":
@@ -66,6 +71,7 @@ export function ItemBadges({ className, filters }) {
                 src={great}
                 alt="Great Impact"
                 className="h-6 aspect-square"
+                draggable="false"
               />
             );
           case "How Good Best":
@@ -75,6 +81,7 @@ export function ItemBadges({ className, filters }) {
                 src={best}
                 alt="Best Impact"
                 className="h-6 aspect-square"
+                draggable="false"
               />
             );
           default:
