@@ -25,14 +25,15 @@ export function MenuItem({ item }) {
         </div>
       </div>
       {dropdown && (
-        <div className="bg-gray-400 px-4 rounded-md mt-4">
-          <p>{item.nutrients[1].value_numeric}g Protein</p>
-          <p>{item.nutrients[2].value_numeric}g Carbohydrates</p>
-          <p>{item.nutrients[3].value_numeric}g Sugar</p>
-          <p>{item.nutrients[4].value_numeric}g Total Fat</p>
-          <p>Ingredients: {item.ingredients}</p>
-        </div>
-      )}
+          <div className="bg-gray-400 px-4 rounded-md mt-4">
+            <p>{item.nutrients[1].value_numeric}g Protein</p>
+            <p>{item.nutrients[2].value_numeric}g Carbohydrates</p>
+            <p>{item.nutrients[3].value_numeric}g Sugar</p>
+            <p>{item.nutrients[4].value_numeric}g Total Fat</p>
+            <p>Ingredients: {item.ingredients}</p>
+            <p>Station: {item.station}</p>
+          </div>
+        )}
     </div>
   );
 }

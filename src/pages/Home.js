@@ -38,7 +38,17 @@ function Home() {
           console.error(data.error);
           alert("An error occurred.");
         } else {
-          setMenuSteast(data.menu.periods.categories);
+          const flattened = data.menu.periods.categories.reduce(
+            (acc, station) =>
+              acc.concat(
+                station.items.map((item) => {
+                  item.station = station.name;
+                  return item;
+                })
+              ),
+            []
+          );
+          setMenuSteast(flattened);
           setPeriodsSteast(data.periods);
         }
       })
@@ -61,7 +71,17 @@ function Home() {
           console.error(data.error);
           alert("An error occurred.");
         } else {
-          setMenuIV(data.menu.periods.categories);
+          const flattened = data.menu.periods.categories.reduce(
+            (acc, station) =>
+              acc.concat(
+                station.items.map((item) => {
+                  item.station = station.name;
+                  return item;
+                })
+              ),
+            []
+          );
+          setMenuIV(flattened);
           setPeriodsIV(data.periods);
         }
       })
@@ -92,6 +112,7 @@ function Home() {
           item.filters.filter((filter) => filter.name === "Vegan").length > 0
       );
     }
+    // TODO: right now, we cannot unsort once we sort initially
     if (filterCalories === true) {
       // theres two ways we can do this, either combine all the stations into one and sort everything at once, or sort each station individually and include a header for each station
       return menuItems.sort((item, nextItem) =>
@@ -197,11 +218,9 @@ function Home() {
         <div className="dining-hall">
           <div className="text-center text-3xl my-5">Stetson East</div>
           {menuSteast ? (
-            menuSteast.map((station) =>
-              filterItems(station.items).map((item) => (
-                <MenuItem key={item.id} item={item} />
-              ))
-            )
+            filterItems(menuSteast).map((item) => (
+              <MenuItem key={item.id} item={item} />
+            ))
           ) : (
             <p>Loading...</p>
           )}
@@ -209,11 +228,9 @@ function Home() {
         <div className="dining-hall">
           <div className="text-center text-3xl my-5">International Village</div>
           {menuIV ? (
-            menuIV.map((station) =>
-              filterItems(station.items).map((item) => (
-                <MenuItem key={item.id} item={item} />
-              ))
-            )
+            filterItems(menuIV).map((item) => (
+              <MenuItem key={item.id} item={item} />
+            ))
           ) : (
             <p>Loading...</p>
           )}
