@@ -3,21 +3,8 @@ import "../App.css";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import { MenuItem } from "../components/MenuItem";
-import moment from "moment";
 
 function Home() {
-  // TODO: default state should be based on time of day
-  // const [curPeriod, setPeriod] = useState(0);
-  const [periodsSteast, setPeriodsSteast] = useState([
-    { id: "" },
-    { id: "" },
-    { id: "" },
-  ]);
-  const [periodsIV, setPeriodsIV] = useState([
-    { id: "" },
-    { id: "" },
-    { id: "" },
-  ]);
   const [menuSteast, setMenuSteast] = useState();
   const [menuIV, setMenuIV] = useState();
   const [filterVegetarian, setFilterVegetarian] = useState(false);
@@ -25,14 +12,12 @@ function Home() {
   const [filterCalories, setFilterCalories] = useState(false);
   const [filterProtein, setFilterProtein] = useState(false);
 
-  async function getMenuSteast(index) {
+  async function getMenuSteast(meal) {
     await axios
-      .get(
-        "https://api.dineoncampus.com/v1/location/586d05e4ee596f6e6c04b527/periods/" +
-          periodsSteast[index].id +
-          "?platform=0&date=" +
-          moment().format("YYYY-M-D")
-      )
+    .get(
+      "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-1a8ee05f-45c3-43dd-9157-7c07e1b36328/default/get-menu",
+      { params: { hall: "steast", meal: meal } }
+    )
       .then(({ data }) => {
         if (data.error) {
           console.error(data.error);
@@ -49,7 +34,6 @@ function Home() {
             []
           );
           setMenuSteast(flattened);
-          setPeriodsSteast(data.periods);
         }
       })
       .catch((err) => {
@@ -58,19 +42,18 @@ function Home() {
       });
   }
 
-  async function getMenuIV(index) {
+  async function getMenuIV(meal) {
     await axios
       .get(
-        "https://api.dineoncampus.com/v1/location/5f4f8a425e42ad17329be131/periods/" +
-          periodsIV[index].id +
-          "?platform=0&date=" +
-          moment().format("YYYY-M-D")
+        "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-1a8ee05f-45c3-43dd-9157-7c07e1b36328/default/get-menu",
+        { params: { hall: "iv", meal: meal } }
       )
       .then(({ data }) => {
         if (data.error) {
           console.error(data.error);
           alert("An error occurred.");
         } else {
+          console.log(data)
           const flattened = data.menu.periods.categories.reduce(
             (acc, station) =>
               acc.concat(
@@ -82,7 +65,6 @@ function Home() {
             []
           );
           setMenuIV(flattened);
-          setPeriodsIV(data.periods);
         }
       })
       .catch((err) => {
@@ -93,8 +75,8 @@ function Home() {
 
   useEffect(() => {
     // this might be where we could do current time of day logic
-    getMenuSteast(0);
-    getMenuIV(0);
+    getMenuSteast("breakfast");
+    getMenuIV("breakfast");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -127,7 +109,8 @@ function Home() {
       return menuItems.sort((item, nextItem) =>
         item.nutrients[1].value_numeric < nextItem.nutrients[1].value_numeric
           ? 1
-          : item.nutrients[1].value_numeric > nextItem.nutrients[1].value_numeric
+          : item.nutrients[1].value_numeric >
+            nextItem.nutrients[1].value_numeric
           ? -1
           : 0
       );
@@ -151,8 +134,8 @@ function Home() {
           className="time-button"
           onClick={() => {
             // setPeriod(0);
-            getMenuSteast(0);
-            getMenuIV(0);
+            getMenuSteast("breakfast");
+            getMenuIV("breakfast");
           }}
         >
           Breakfast
@@ -161,8 +144,8 @@ function Home() {
           className="time-button"
           onClick={() => {
             // setPeriod(1);
-            getMenuSteast(1);
-            getMenuIV(1);
+            getMenuSteast("lunch");
+            getMenuIV("lunch");
           }}
         >
           Lunch
@@ -171,8 +154,8 @@ function Home() {
           className="time-button"
           onClick={() => {
             // setPeriod(2);
-            getMenuSteast(2);
-            getMenuIV(2);
+            getMenuSteast("dinner");
+            getMenuIV("dinner");
           }}
         >
           Dinner
