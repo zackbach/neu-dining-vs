@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename="neu-dining-vs">
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
