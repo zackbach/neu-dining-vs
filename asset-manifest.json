@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/neu-dining-vs/static/css/main.aca25fde.css",
+    "main.js": "/neu-dining-vs/static/js/main.694577d8.js",
+    "static/js/787.bbd5097e.chunk.js": "/neu-dining-vs/static/js/787.bbd5097e.chunk.js",
+    "static/media/howgood-climate-friendly.png": "/neu-dining-vs/static/media/howgood-climate-friendly.331acb738a873321d5ec.png",
+    "static/media/howgood-best.png": "/neu-dining-vs/static/media/howgood-best.3d3feab36490aacf7745.png",
+    "static/media/howgood-great.png": "/neu-dining-vs/static/media/howgood-great.4665bd22acf65d9ac65e.png",
+    "static/media/howgood-good.png": "/neu-dining-vs/static/media/howgood-good.200fbdd27c57dc1dbd0a.png",
+    "static/media/icon_vegan_200px.png": "/neu-dining-vs/static/media/icon_vegan_200px.c7b7fe299e80a5c8486a.png",
+    "static/media/icon_vegetarian_200px.png": "/neu-dining-vs/static/media/icon_vegetarian_200px.1e2766a7740754a8035e.png",
+    "index.html": "/neu-dining-vs/index.html",
+    "main.aca25fde.css.map": "/neu-dining-vs/static/css/main.aca25fde.css.map",
+    "main.694577d8.js.map": "/neu-dining-vs/static/js/main.694577d8.js.map",
+    "787.bbd5097e.chunk.js.map": "/neu-dining-vs/static/js/787.bbd5097e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aca25fde.css",
+    "static/js/main.694577d8.js"
+  ]
+}
