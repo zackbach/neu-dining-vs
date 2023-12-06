@@ -1,8 +1,8 @@
-import axios from "axios";
 import "../App.css";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import { MenuItem } from "../components/MenuItem";
+import { getMenuIV, getMenuSteast } from "./api";
 
 function Home() {
   const [menuSteast, setMenuSteast] = useState();
@@ -12,71 +12,19 @@ function Home() {
   const [filterCalories, setFilterCalories] = useState(false);
   const [filterProtein, setFilterProtein] = useState(false);
 
-  async function getMenuSteast(meal) {
-    await axios
-    .get(
-      "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-1a8ee05f-45c3-43dd-9157-7c07e1b36328/default/get-menu",
-      { params: { hall: "steast", meal: meal } }
-    )
-      .then(({ data }) => {
-        if (data.error) {
-          console.error(data.error);
-          alert("An error occurred.");
-        } else {
-          const flattened = data.menu.periods.categories.reduce(
-            (acc, station) =>
-              acc.concat(
-                station.items.map((item) => {
-                  item.station = station.name;
-                  return item;
-                })
-              ),
-            []
-          );
-          setMenuSteast(flattened);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("An error occurred.");
-      });
-  }
-
-  async function getMenuIV(meal) {
-    await axios
-      .get(
-        "https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-1a8ee05f-45c3-43dd-9157-7c07e1b36328/default/get-menu",
-        { params: { hall: "iv", meal: meal } }
-      )
-      .then(({ data }) => {
-        if (data.error) {
-          console.error(data.error);
-          alert("An error occurred.");
-        } else {
-          console.log(data)
-          const flattened = data.menu.periods.categories.reduce(
-            (acc, station) =>
-              acc.concat(
-                station.items.map((item) => {
-                  item.station = station.name;
-                  return item;
-                })
-              ),
-            []
-          );
-          setMenuIV(flattened);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("An error occurred.");
-      });
-  }
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
+  const meal =
+    currentHour >= 0 && currentHour < 11
+      ? "breakfast"
+      : currentHour >= 11 && currentHour < 17
+      ? "lunch"
+      : "dinner";
 
   useEffect(() => {
     // this might be where we could do current time of day logic
-    getMenuSteast("breakfast");
-    getMenuIV("breakfast");
+    getMenuSteast(meal).then((data) => setMenuSteast(data));
+    getMenuIV(meal).then((data) => setMenuIV(data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -134,8 +82,8 @@ function Home() {
           className="time-button"
           onClick={() => {
             // setPeriod(0);
-            getMenuSteast("breakfast");
-            getMenuIV("breakfast");
+            getMenuSteast("breakfast").then((data) => setMenuSteast(data));
+            getMenuIV("breakfast").then((data) => setMenuIV(data));
           }}
         >
           Breakfast
@@ -144,8 +92,8 @@ function Home() {
           className="time-button"
           onClick={() => {
             // setPeriod(1);
-            getMenuSteast("lunch");
-            getMenuIV("lunch");
+            getMenuSteast("lunch").then((data) => setMenuSteast(data));
+            getMenuIV("lunch").then((data) => setMenuIV(data));
           }}
         >
           Lunch
@@ -154,8 +102,8 @@ function Home() {
           className="time-button"
           onClick={() => {
             // setPeriod(2);
-            getMenuSteast("dinner");
-            getMenuIV("dinner");
+            getMenuSteast("dinner").then((data) => setMenuSteast(data));
+            getMenuIV("dinner").then((data) => setMenuIV(data));
           }}
         >
           Dinner
